@@ -210,7 +210,6 @@ class CurateDataStructure(DataStructure):
 
     def clean(self):
         """Clean before saving
-
         Returns:
 
         """

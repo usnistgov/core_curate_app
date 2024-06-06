@@ -6,7 +6,7 @@ from unittest.mock import patch, MagicMock
 
 from django.test import RequestFactory
 
-from core_curate_app.views.common.views import FormView
+from core_curate_app.views.common.views import FormView, DataStructureMixin
 
 from core_main_app.utils.tests_tools.MockUser import create_mock_user
 from core_main_app.utils.labels import get_form_label
@@ -47,3 +47,23 @@ class TestFormView(TestCase):
             + " was not saved and cannot be displayed."
         )
         self.assertTrue(msg_error in response.content.decode())
+
+
+class TestDataStructureMixin(TestCase):
+    """TestDataStructureMixin"""
+
+    def setUp(self):
+        self.mixin_instance = DataStructureMixin()
+
+    def test_get_modals(self):
+        # Expected modals list
+        expected_modals = [
+            "core_main_app/common/modals/create_data_modal.html",
+            "core_curate_app/user/data-entry/modals/switch_to_form_editor.html",
+        ]
+
+        # Get the actual modals from the mixin
+        actual_modals = self.mixin_instance._get_modals()
+
+        # Assert that the actual modals match the expected modals
+        self.assertEqual(actual_modals, expected_modals)

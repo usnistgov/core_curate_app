@@ -30,6 +30,7 @@ from core_main_app.components.data import api as data_api
 from core_main_app.components.data.models import Data
 from core_main_app.components.template import api as template_api
 from core_main_app.settings import MAX_DOCUMENT_EDITING_SIZE
+from core_main_app.utils.assets_combiner import join_assets
 
 from core_main_app.utils.labels import get_data_label, get_form_label
 from core_main_app.views.common.views import CommonView, XmlEditor, JSONEditor
@@ -116,6 +117,8 @@ class FormView(CommonView):
 
 
 class DataStructureMixin:
+    """DataStructureMixin"""
+
     object_name = get_form_label()
 
     def _get_object(self, request):
@@ -157,26 +160,24 @@ class DataStructureMixin:
             )
 
     def _get_assets(self):
-        """get assestd
+        """get assets
 
         Args:
 
         Returns:
         """
-        assets = super()._get_assets()
-        # add js relatives to the data structure editor
-        assets["js"].append(
-            {
-                "path": "core_curate_app/user/js/text_editor.raw.js",
-                "is_raw": True,
-            },
-        )
-        assets["js"].append(
-            {
-                "path": "core_curate_app/user/js/switch_editor.js",
-                "is_raw": False,
-            },
-        )
+        assets = {
+            "js": [
+                {
+                    "path": "core_curate_app/user/js/text_editor.raw.js",
+                    "is_raw": True,
+                },
+                {
+                    "path": "core_curate_app/user/js/switch_editor.js",
+                    "is_raw": False,
+                },
+            ]
+        }
 
         return assets
 
@@ -188,11 +189,11 @@ class DataStructureMixin:
         Return:
         """
 
-        # add modals relatives to the data structure editor
-        return [
+        modals = [
             "core_main_app/common/modals/create_data_modal.html",
             "core_curate_app/user/data-entry/modals/switch_to_form_editor.html",
         ]
+        return modals
 
     def save(self, *args, **kwargs):
         """Save as data
@@ -265,6 +266,28 @@ class DataStructureXMLEditor(DataStructureMixin, XmlEditor):
             data_structure, data_structure.name, data_structure.form_string
         )
 
+    def _get_assets(self):
+        """get assets from DataStructureMixin & XmlEditor
+
+        Returns:
+
+        """
+        assets_from_mixin = DataStructureMixin._get_assets(self)
+        assets_from_editor = XmlEditor._get_assets(self)
+
+        return join_assets(assets_from_mixin, assets_from_editor)
+
+    def _get_modals(self):
+        """get modals from DataStructureMixin & XmlEditor
+
+        Returns:
+
+        """
+        modals_from_mixin = DataStructureMixin._get_modals(self)
+        modals_from_editor = XmlEditor._get_modals(self)
+
+        return modals_from_mixin + modals_from_editor
+
 
 class DataStructureJSONEditor(DataStructureMixin, JSONEditor):
     """Data Structure JSON Editor View"""
@@ -280,3 +303,25 @@ class DataStructureJSONEditor(DataStructureMixin, JSONEditor):
         return self.get_context(
             data_structure, data_structure.name, data_structure.form_string
         )
+
+    def _get_assets(self):
+        """get assets from DataStructureMixin & XmlEditor
+
+        Returns:
+
+        """
+        assets_from_mixin = DataStructureMixin._get_assets(self)
+        assets_from_editor = JSONEditor._get_assets(self)
+
+        return join_assets(assets_from_mixin, assets_from_editor)
+
+    def _get_modals(self):
+        """get modals from DataStructureMixin & JSONEditor
+
+        Returns:
+
+        """
+        modals_from_mixin = DataStructureMixin._get_modals(self)
+        modals_from_editor = JSONEditor._get_modals(self)
+
+        return modals_from_mixin + modals_from_editor

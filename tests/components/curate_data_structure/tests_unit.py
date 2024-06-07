@@ -2,23 +2,21 @@
 """
 
 from unittest.case import TestCase
-
 from unittest.mock import patch
 
-from core_main_app.access_control.exceptions import AccessControlError
+from tests.components.curate_data_structure.fixtures.fixtures import (
+    DataStructureFixtures,
+)
 
-from core_main_app.components.data.models import Data
-
-from core_main_app.commons import exceptions
-from core_main_app.components.template.models import Template
-from core_main_app.utils.tests_tools.MockUser import create_mock_user
 import core_curate_app.components.curate_data_structure.api as curate_data_structure_api
 from core_curate_app.components.curate_data_structure.models import (
     CurateDataStructure,
 )
-from tests.components.curate_data_structure.fixtures.fixtures import (
-    DataStructureFixtures,
-)
+from core_main_app.access_control.exceptions import AccessControlError
+from core_main_app.commons import exceptions
+from core_main_app.components.data.models import Data
+from core_main_app.components.template.models import Template
+from core_main_app.utils.tests_tools.MockUser import create_mock_user
 
 fixture_data_structure = DataStructureFixtures()
 

@@ -10,12 +10,12 @@ from django.http import (
 from django.test import RequestFactory, override_settings
 from django.urls import reverse
 
+from core_curate_app.views.user import views as curate_user_views
 from core_curate_app.views.user.views import (
     EnterDataView,
     ViewDataView,
     generate_root_element,
 )
-from core_curate_app.views.user import views as curate_user_views
 from core_main_app.commons.exceptions import XSDError
 from core_main_app.components.template.models import Template
 from core_main_app.utils.tests_tools.MockUser import create_mock_user

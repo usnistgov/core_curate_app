@@ -7,6 +7,9 @@ from unittest.mock import patch
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.test import RequestFactory
+from tests.components.curate_data_structure.fixtures.fixtures import (
+    DataStructureFixtures,
+)
 
 from core_curate_app.views.common.views import (
     DataStructureXMLEditor,
@@ -17,9 +20,6 @@ from core_main_app.utils.integration_tests.integration_base_test_case import (
     IntegrationBaseTestCase,
 )
 from core_main_app.utils.tests_tools.MockUser import create_mock_user
-from tests.components.curate_data_structure.fixtures.fixtures import (
-    DataStructureFixtures,
-)
 
 fixture_data_structure = DataStructureFixtures()
 

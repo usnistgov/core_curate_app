@@ -100,7 +100,7 @@ def delete(curate_data_structure, user):
         curate_data_structure:
         user:
     """
-    curate_data_structure.delete()
+    curate_data_structure.delete_data_structure_with_elements()
 
 
 def get_all_by_user_id_with_no_data(user_id):

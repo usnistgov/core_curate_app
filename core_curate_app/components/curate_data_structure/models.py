@@ -3,7 +3,6 @@
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, IntegrityError
-from django.db.models.signals import pre_delete
 from core_main_app.commons import exceptions
 from core_main_app.utils.validation.regex_validation import (
     not_empty_or_whitespaces,
@@ -228,7 +227,3 @@ class CurateDataStructure(DataStructure):
         """
 
         return CurateDataStructure.objects.filter(data=data.id).all()
-
-
-# Connect signals
-pre_delete.connect(DataStructure.pre_delete, sender=CurateDataStructure)

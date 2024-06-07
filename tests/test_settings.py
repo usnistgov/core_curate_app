@@ -11,6 +11,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.sites",
+    "django_celery_beat",
     # Local apps
     "tests",
     "core_main_app",
@@ -67,3 +68,4 @@ ENABLE_XML_ENTITIES_TOOLTIPS = True
 ENABLE_SAML2_SSO_AUTH = False
 BOOTSTRAP_VERSION = "4.6.2"
 ENABLE_JSON_SCHEMA_SUPPORT = True
+CELERY_ALWAYS_EAGER = True

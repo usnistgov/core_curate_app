@@ -1,12 +1,11 @@
 """ Authentication tests for Data Structure REST API
 """
 
-from django.test import SimpleTestCase
 from unittest.mock import patch
+
+from django.test import SimpleTestCase
 from rest_framework import status
 
-from core_main_app.utils.tests_tools.MockUser import create_mock_user
-from core_main_app.utils.tests_tools.RequestMock import RequestMock
 import core_curate_app.components.curate_data_structure.api as data_structure_api
 from core_curate_app.components.curate_data_structure.models import (
     CurateDataStructure,
@@ -20,6 +19,8 @@ from core_curate_app.rest.curate_data_structure.admin_serializers import (
 from core_curate_app.rest.curate_data_structure.serializers import (
     CurateDataStructureSerializer,
 )
+from core_main_app.utils.tests_tools.MockUser import create_mock_user
+from core_main_app.utils.tests_tools.RequestMock import RequestMock
 
 
 class TestDataStructureListAdminPostPermissions(SimpleTestCase):

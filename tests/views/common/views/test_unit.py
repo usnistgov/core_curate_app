@@ -7,9 +7,8 @@ from unittest.mock import patch, MagicMock
 from django.test import RequestFactory
 
 from core_curate_app.views.common.views import FormView, DataStructureMixin
-
-from core_main_app.utils.tests_tools.MockUser import create_mock_user
 from core_main_app.utils.labels import get_form_label
+from core_main_app.utils.tests_tools.MockUser import create_mock_user
 
 
 class TestFormView(TestCase):

@@ -2,6 +2,14 @@
 """
 
 from django.contrib.auth.models import AnonymousUser
+from tests.components.curate_data_structure.fixtures.fixtures import (
+    DataStructureFixtures,
+)
+
+import core_curate_app.components.curate_data_structure.api as curate_data_structure_api
+from core_curate_app.components.curate_data_structure.models import (
+    CurateDataStructure,
+)
 from core_main_app.access_control.exceptions import AccessControlError
 from core_main_app.utils.integration_tests.integration_base_test_case import (
     IntegrationBaseTestCase,
@@ -10,15 +18,6 @@ from core_main_app.utils.tests_tools.MockUser import create_mock_user
 from core_parser_app.components.data_structure.models import (
     DataStructureElement,
 )
-from core_curate_app.components.curate_data_structure.models import (
-    CurateDataStructure,
-)
-import core_curate_app.components.curate_data_structure.api as curate_data_structure_api
-
-from tests.components.curate_data_structure.fixtures.fixtures import (
-    DataStructureFixtures,
-)
-
 
 fixture_data_structure = DataStructureFixtures()
 

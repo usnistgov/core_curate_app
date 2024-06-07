@@ -3,13 +3,13 @@
 
 from unittest.case import TestCase
 
+from core_curate_app.access_control import api as access_control_api
 from core_curate_app.components.curate_data_structure.models import (
     CurateDataStructure,
 )
 from core_main_app.access_control.exceptions import AccessControlError
 from core_main_app.components.template.models import Template
 from core_main_app.utils.tests_tools.MockUser import create_mock_user
-from core_curate_app.access_control import api as access_control_api
 
 
 class TestAccessControlCheckCanWrite(TestCase):

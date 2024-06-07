@@ -2,20 +2,19 @@
 """
 
 from rest_framework import status
-from core_main_app.utils.integration_tests.integration_base_test_case import (
-    IntegrationBaseTestCase,
-)
-
-from core_main_app.utils.tests_tools.MockUser import create_mock_user
-from core_main_app.utils.tests_tools.RequestMock import RequestMock
 from tests.components.curate_data_structure.fixtures.fixtures import (
     DataStructureFixtures,
     DataStructureFixtures2,
 )
+
 from core_curate_app.rest.curate_data_structure import (
     views as data_structure_rest_views,
 )
-
+from core_main_app.utils.integration_tests.integration_base_test_case import (
+    IntegrationBaseTestCase,
+)
+from core_main_app.utils.tests_tools.MockUser import create_mock_user
+from core_main_app.utils.tests_tools.RequestMock import RequestMock
 
 fixture_data_structure = DataStructureFixtures()
 fixture_data_structure2 = DataStructureFixtures2()

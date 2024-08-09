@@ -55,7 +55,7 @@ class TestOpenForm(TestCase):
         """
         data = {"forms": "test"}
         form = OpenForm(data)
-        self.assertEquals(
+        self.assertEqual(
             form.fields["forms"].widget.attrs["class"], "form-control"
         )
 
@@ -68,7 +68,7 @@ class TestOpenForm(TestCase):
         """
         data = {"forms": "test"}
         form = OpenForm(data)
-        self.assertEquals(
+        self.assertEqual(
             form.fields["forms"].widget.attrs["class"], "form-select"
         )
 
@@ -83,5 +83,5 @@ class TestHiddenFieldsForm(TestCase):
 
         """
         form = HiddenFieldsForm(template_id="1", template_format="XSD")
-        self.assertEquals(form.fields["template_id"].initial, "1")
-        self.assertEquals(form.fields["template_format"].initial, "XSD")
+        self.assertEqual(form.fields["template_id"].initial, "1")
+        self.assertEqual(form.fields["template_format"].initial, "XSD")

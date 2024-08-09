@@ -470,7 +470,7 @@ class TestCurateDataStructureGetByDataId(IntegrationBaseTestCase):
             self.fixture.data.id, mock_user
         )
         self.assertTrue(isinstance(data_structure, CurateDataStructure))
-        self.assertEquals(self.fixture.data.id, data_structure.data.id)
+        self.assertEqual(self.fixture.data.id, data_structure.data.id)
 
     def test_get_by_data_id_as_anonymous_user_raises_error(self):
         """

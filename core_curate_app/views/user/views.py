@@ -1,5 +1,6 @@
 """Curate app user views
 """
+
 import json
 import logging
 from builtins import any

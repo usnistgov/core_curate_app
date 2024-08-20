@@ -1,6 +1,7 @@
 """
     Common views
 """
+
 import json
 
 from django.contrib import messages

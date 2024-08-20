@@ -1,5 +1,6 @@
 """ Unit tests for views from `views.admin.ajax`.
 """
+
 from unittest.case import TestCase
 from unittest.mock import patch
 

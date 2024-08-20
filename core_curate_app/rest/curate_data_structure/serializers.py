@@ -1,5 +1,6 @@
 """Curate Data Structure Serializers
 """
+
 from rest_framework.serializers import ModelSerializer
 
 from core_curate_app.components.curate_data_structure import (
@@ -27,16 +28,18 @@ class CurateDataStructureSerializer(ModelSerializer):
         curate_data_structure = CurateDataStructure(
             name=validated_data["name"],
             template=validated_data["template"],
-            form_string=validated_data["form_string"]
-            if "form_string" in validated_data
-            else None,
+            form_string=(
+                validated_data["form_string"]
+                if "form_string" in validated_data
+                else None
+            ),
             user=str(self.context["request"].user.id),
             data=validated_data["data"] if "data" in validated_data else None,
-            data_structure_element_root=validated_data[
-                "data_structure_element_root"
-            ]
-            if "data_structure_element_root" in validated_data
-            else None,
+            data_structure_element_root=(
+                validated_data["data_structure_element_root"]
+                if "data_structure_element_root" in validated_data
+                else None
+            ),
         )
 
         curate_data_structure_api.upsert(

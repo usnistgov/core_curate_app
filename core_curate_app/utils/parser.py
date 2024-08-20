@@ -1,5 +1,6 @@
 """Parser util for curate app
 """
+
 from core_parser_app.tools.parser.parser import XSDParser
 from core_curate_app.settings import (
     PARSER_MIN_TREE,

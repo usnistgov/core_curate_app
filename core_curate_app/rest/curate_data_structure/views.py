@@ -1,5 +1,6 @@
 """ Views for the Curate Data Structure REST API
 """
+
 import logging
 
 from django.http import Http404

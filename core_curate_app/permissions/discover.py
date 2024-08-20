@@ -1,5 +1,6 @@
 """ Initialize permissions for core curate app.
 """
+
 import logging
 
 from django.contrib.auth.models import Group, Permission

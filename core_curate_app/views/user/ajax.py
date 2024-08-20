@@ -1,5 +1,6 @@
 """AJAX views for the Curate app
 """
+
 import json
 import logging
 
@@ -446,9 +447,11 @@ def validate_form(request):
         elif template.format == Template.JSON:
             try:
                 main_json_utils.validate_json_data(
-                    request.POST["form_string"]
-                    if "form_string" in request.POST
-                    else curate_data_structure.form_string,
+                    (
+                        request.POST["form_string"]
+                        if "form_string" in request.POST
+                        else curate_data_structure.form_string
+                    ),
                     template.content,
                 )
             except JSONError as json_error:
@@ -459,9 +462,9 @@ def validate_form(request):
             return HttpResponseBadRequest("Template format not supported.")
 
     except XMLSyntaxError as xml_syntax_error:
-        response_dict[
-            "errors"
-        ] = "Your XML data is not well formatted. " + str(xml_syntax_error)
+        response_dict["errors"] = (
+            "Your XML data is not well formatted. " + str(xml_syntax_error)
+        )
     except Exception as exception:
         message = (
             str(exception).replace('"', "'")

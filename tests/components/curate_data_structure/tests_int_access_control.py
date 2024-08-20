@@ -1,5 +1,6 @@
 """ ACL Test Data Structure
 """
+
 from django.contrib.auth.models import AnonymousUser
 from core_main_app.access_control.exceptions import AccessControlError
 from core_main_app.utils.integration_tests.integration_base_test_case import (

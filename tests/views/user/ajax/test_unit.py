@@ -1,5 +1,6 @@
 """ Unit tests for views from `views.user.ajax`.
 """
+
 import json
 from unittest import TestCase
 from unittest.mock import patch, Mock, MagicMock
@@ -675,6 +676,30 @@ class TestValidateFormView(TestCase):
         )
         mock_template_get_by_id.return_value = mock_template
         mock_render_xml.return_value = "<root></root>"
+
+        response = curate_user_ajax.validate_form(
+            self.request,
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("errors", response.content.decode())
+
+    @patch.object(curate_user_views, "render_xml")
+    @patch("core_main_app.components.template.api.get_by_id")
+    @patch.object(curate_user_ajax, "curate_data_structure_api")
+    def test_invalid_xml_returns_errors(
+        self,
+        mock_curate_data_structure_api,
+        mock_template_get_by_id,
+        mock_render_xml,
+    ):
+        """test_invalid_xml_returns_errors"""
+        mock_template = _get_template()
+        mock_curate_data_structure_api.return_value = MagicMock(
+            template=mock_template
+        )
+        mock_template_get_by_id.return_value = mock_template
+        mock_render_xml.return_value = "<root></ro"
 
         response = curate_user_ajax.validate_form(
             self.request,

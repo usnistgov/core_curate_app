@@ -1,5 +1,6 @@
 """ Test access to views from `views.common.views`.
 """
+
 import json
 from unittest.mock import patch
 

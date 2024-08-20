@@ -1,5 +1,6 @@
 """Curate Data Structure models
 """
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, IntegrityError
 from django.db.models.signals import pre_delete

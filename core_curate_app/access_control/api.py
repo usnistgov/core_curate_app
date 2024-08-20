@@ -1,5 +1,6 @@
 """ Set of functions to define the common rules for access control across collections
 """
+
 import logging
 
 from django.contrib.auth.models import User, AnonymousUser

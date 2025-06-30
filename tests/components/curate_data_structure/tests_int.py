@@ -193,8 +193,8 @@ class TestCurateDataStructureUpdateDataStructureRoot(IntegrationBaseTestCase):
             data_structure, self.fixture.data_structure_root_element, mock_user
         )
         self.assertTrue(isinstance(result, CurateDataStructure))
-        self.assertNotEquals(result.data_structure_element_root, None)
-        self.assertEquals(
+        self.assertNotEqual(result.data_structure_element_root, None)
+        self.assertEqual(
             result.data_structure_element_root,
             self.fixture.data_structure_root_element,
         )
@@ -244,11 +244,11 @@ class TestDeleteCurateDataStructure(IntegrationBaseTestCase):
             mock_user,
         )
 
-        self.assertEquals(
+        self.assertEqual(
             self.fixture.data_structure_1.data_structure_element_root,
             new_data_structure_element_root,
         )
-        self.assertEquals(
+        self.assertEqual(
             DataStructureElement.get_by_id(new_data_structure_element_root.id),
             new_data_structure_element_root,
         )

@@ -1,5 +1,4 @@
-""" Views for the Curate Data Structure REST API
-"""
+"""Views for the Curate Data Structure REST API"""
 
 import logging
 

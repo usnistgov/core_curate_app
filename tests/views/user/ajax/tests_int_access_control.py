@@ -1,5 +1,4 @@
-""" Test access to views from `views.user.ajax`.
-"""
+"""Test access to views from `views.user.ajax`."""
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import RequestFactory

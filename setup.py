@@ -1,5 +1,4 @@
-""" Setup for core curate app
-"""
+"""Setup for core curate app"""
 
 from os import chdir, pardir
 from os.path import join, exists, dirname, normpath, abspath

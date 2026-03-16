@@ -1,5 +1,4 @@
-""" Settings for core_curate_app tests
-"""
+"""Settings for core_curate_app tests"""
 
 SECRET_KEY = "fake-key"
 

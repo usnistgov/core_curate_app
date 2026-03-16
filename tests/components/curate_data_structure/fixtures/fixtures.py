@@ -1,5 +1,4 @@
-""" Fixtures files for Data Structure
-"""
+"""Fixtures files for Data Structure"""
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 

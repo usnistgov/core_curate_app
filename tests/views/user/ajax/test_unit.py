@@ -1,5 +1,4 @@
-""" Unit tests for views from `views.user.ajax`.
-"""
+"""Unit tests for views from `views.user.ajax`."""
 
 import json
 from unittest import TestCase

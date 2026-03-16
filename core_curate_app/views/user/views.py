@@ -1,5 +1,4 @@
-"""Curate app user views
-"""
+"""Curate app user views"""
 
 import json
 import logging

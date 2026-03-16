@@ -1,5 +1,5 @@
 """
-    Common views
+Common views
 """
 
 import json

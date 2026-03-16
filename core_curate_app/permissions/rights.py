@@ -1,5 +1,4 @@
-""" Rights for core curate app
-"""
+"""Rights for core curate app"""
 
 CURATE_CONTENT_TYPE = "core_curate_app"
 CURATE_ACCESS = "access_curate"

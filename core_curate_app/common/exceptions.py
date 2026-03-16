@@ -1,5 +1,5 @@
 """
-    Core curate exceptions
+Core curate exceptions
 """
 
 

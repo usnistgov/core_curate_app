@@ -1,12 +1,10 @@
-""" Initialize permissions for core curate app.
-"""
+"""Initialize permissions for core curate app."""
 
 import logging
 
 from django.contrib.auth.models import Group, Permission
 import core_main_app.permissions.rights as main_rights
 import core_curate_app.permissions.rights as curate_rights
-
 
 logger = logging.getLogger(__name__)
 

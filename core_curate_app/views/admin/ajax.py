@@ -1,5 +1,4 @@
-"""Admin AJAX views for the Curate app
-"""
+"""Admin AJAX views for the Curate app"""
 
 import json
 

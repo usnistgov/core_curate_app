@@ -1,5 +1,4 @@
-""" Unit tests for views from `views.user.views`.
-"""
+"""Unit tests for views from `views.user.views`."""
 
 from unittest.case import TestCase
 from unittest.mock import patch, MagicMock

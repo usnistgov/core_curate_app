@@ -1,5 +1,4 @@
-"""Curate models
-"""
+"""Curate models"""
 
 from django.db import models
 

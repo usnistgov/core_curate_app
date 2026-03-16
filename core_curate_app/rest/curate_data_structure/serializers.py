@@ -1,5 +1,4 @@
-"""Curate Data Structure Serializers
-"""
+"""Curate Data Structure Serializers"""
 
 from rest_framework.serializers import ModelSerializer
 

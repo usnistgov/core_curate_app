@@ -1,5 +1,4 @@
-""" ACL Test Data Structure
-"""
+"""ACL Test Data Structure"""
 
 from django.contrib.auth.models import AnonymousUser
 from tests.components.curate_data_structure.fixtures.fixtures import (

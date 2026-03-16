@@ -1,5 +1,4 @@
-"""AJAX views for the Curate app
-"""
+"""AJAX views for the Curate app"""
 
 import json
 import logging

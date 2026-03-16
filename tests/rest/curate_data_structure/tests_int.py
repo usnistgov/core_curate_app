@@ -1,5 +1,4 @@
-""" Integration Test for Data Structure Rest API
-"""
+"""Integration Test for Data Structure Rest API"""
 
 from rest_framework import status
 from tests.components.curate_data_structure.fixtures.fixtures import (

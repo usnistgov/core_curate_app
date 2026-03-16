@@ -1,5 +1,4 @@
-""" Add Curate in main menu
-"""
+"""Add Curate in main menu"""
 
 from django.urls import reverse
 from menu import Menu, MenuItem

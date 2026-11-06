@@ -7,6 +7,7 @@ from core_main_app.access_control.exceptions import AccessControlError
 from core_curate_app.components.curate_data_structure.models import (
     CurateDataStructure,
 )
+from core_main_app.access_control import api as main_access_control
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +29,7 @@ def can_read(func, *args, **kwargs):
         None,
     )
 
-    if user.is_anonymous or user is None:
+    if user is None or user.is_anonymous:
         raise AccessControlError(
             "The user doesn't have enough rights to access this document."
         )
@@ -62,10 +63,17 @@ def _check_can_read(document_list, user):
     # check access is correct
     for document in document_list:
         # user is document owner
-        if document.user == str(user.id):
-            continue
-        # user is not owner or document
-        raise AccessControlError("The user doesn't have enough rights.")
+        if document.user != str(user.id):
+            raise AccessControlError("The user doesn't have enough rights.")
+        if document.data:
+            main_access_control.check_can_read_document(document.data, user)
+        if (
+            document.data_structure_element_root
+            and document.data_structure_element_root.user != str(user.id)
+        ):
+            raise AccessControlError(
+                "The user doesn't have enough rights to access this document."
+            )
 
 
 def check_can_write(data_structure, user):
@@ -87,6 +95,17 @@ def check_can_write(data_structure, user):
         return
 
     if data_structure.user != str(user.id):
+        raise AccessControlError(
+            "The user doesn't have enough rights to access this document."
+        )
+
+    if data_structure.data:
+        main_access_control.check_can_write(data_structure.data, user)
+
+    if (
+        data_structure.data_structure_element_root
+        and data_structure.data_structure_element_root.user != str(user.id)
+    ):
         raise AccessControlError(
             "The user doesn't have enough rights to access this document."
         )

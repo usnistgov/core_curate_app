@@ -46,6 +46,28 @@ class TestFormView(TestCase):
         )
         self.assertTrue(msg_error in response.content.decode())
 
+    @patch("core_curate_app.components.curate_data_structure.api.get_by_id")
+    def test_form_view_returns_error_when_xml_string_is_not_well_formed(
+        self, mock_ds_get_by_id
+    ):
+        """test_form_view_returns_error_when_xml_string_is_not_well_formed
+
+
+        Returns:
+
+
+        """
+        mock_ds = MagicMock()
+        mock_ds.form_string = "<tag>"
+        mock_ds_get_by_id.return_value = mock_ds
+
+        request = self.factory.get("core_curate_view_form")
+
+        request.user = self.user1
+        response = FormView.as_view()(request, curate_data_structure_id=1)
+        msg_error = "The document is not well-formed."
+        self.assertTrue(msg_error in response.content.decode())
+
 
 class TestDataStructureMixin(TestCase):
     """TestDataStructureMixin"""

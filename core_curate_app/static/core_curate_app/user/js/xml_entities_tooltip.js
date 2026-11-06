@@ -90,6 +90,7 @@ var checkCircleItem = function(element) {
     return buttonNumber - hiddenButtonNumber;
 }
 
+$(document).on('blur', 'textarea', checkPredefinedXmlEntities);
 $(document).on('blur', 'input.default', checkPredefinedXmlEntities);
 $(document).on('blur', 'textarea', function() { setTimeout(refreshTooltipPosition, 250) });
 $(document).on('click', '.add', function() { setTimeout(refreshTooltipPosition, 250) });

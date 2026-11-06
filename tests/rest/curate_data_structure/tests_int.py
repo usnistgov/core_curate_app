@@ -99,6 +99,26 @@ class TestDataStructureListAdmin(IntegrationBaseTestCase):
         # Assert
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_post_not_well_formed_document_returns_http_400(self):
+        """
+        test_post_not_well_formed_document_returns_http_400
+
+        Returns:
+
+        """
+        # Arrange
+        self.data["form_string"] = "<tag>"
+
+        # Act
+        response = RequestMock.do_request_post(
+            data_structure_rest_views.AdminCurateDataStructureList.as_view(),
+            self.user,
+            data=self.data,
+        )
+
+        # Assert
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_post_data_structure_missing_field_returns_http_400(self):
         """
         test_post_data_structure_missing_field_returns_http_400
@@ -203,6 +223,26 @@ class TestDataStructureList(IntegrationBaseTestCase):
         """
         # Arrange
         self.data["template"] = "507f1f77bcf86cd799439011"
+
+        # Act
+        response = RequestMock.do_request_post(
+            data_structure_rest_views.CurateDataStructureList.as_view(),
+            self.user,
+            data=self.data,
+        )
+
+        # Assert
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_post_not_well_formed_document_returns_http_400(self):
+        """
+        test_post_not_well_formed_document_returns_http_400
+
+        Returns:
+
+        """
+        # Arrange
+        self.data["form_string"] = "<tag>"
 
         # Act
         response = RequestMock.do_request_post(

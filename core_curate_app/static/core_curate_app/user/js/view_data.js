@@ -42,7 +42,7 @@ var saveToRepository = function()
 var XMLDataSavedError = function(errors)
 {
     var $saved_error_modal = $("#save-error-modal");
-    $("#saveErrorMessage").html(errors);
+    $("#saveErrorMessage").text(errors);
     $saved_error_modal.modal("show");
 };
 

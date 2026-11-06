@@ -1,13 +1,13 @@
 """Curate Data Structure Serializers"""
 
-from rest_framework.serializers import ModelSerializer
-
+from rest_framework.serializers import ModelSerializer, ValidationError
 from core_curate_app.components.curate_data_structure import (
     api as curate_data_structure_api,
 )
 from core_curate_app.components.curate_data_structure.models import (
     CurateDataStructure,
 )
+from core_curate_app.utils.validation import check_well_formed
 
 
 class CurateDataStructureSerializer(ModelSerializer):
@@ -17,7 +17,23 @@ class CurateDataStructureSerializer(ModelSerializer):
         """Meta"""
 
         model = CurateDataStructure
-        fields = "__all__"
+        fields = [
+            "id",
+            "name",
+            "template",
+            "form_string",
+            "data",
+            "data_structure_element_root",
+        ]
+        read_only_fields = ("id",)
+
+    def validate_form_string(self, value):
+        """Ensure that the form_string is either well-formed XML or well-formed JSON."""
+        try:
+            check_well_formed(value)
+            return value
+        except:  # noqa: E722
+            raise ValidationError("The form_string is not well-formed.")
 
     def create(self, validated_data):
         """

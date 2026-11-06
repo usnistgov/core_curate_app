@@ -234,7 +234,7 @@ class TestDeleteCurateDataStructure(IntegrationBaseTestCase):
         mock_user = create_mock_user(self.fixture.data_structure_1.user)
 
         new_data_structure_element_root = _get_data_structure_element(
-            mock_user, self.fixture.data_structure_1
+            mock_user.id, self.fixture.data_structure_1
         )
 
         curate_data_structure_api.update_data_structure_root(

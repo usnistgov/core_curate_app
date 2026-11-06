@@ -35,6 +35,7 @@ from core_main_app.utils.assets_combiner import join_assets
 from core_main_app.utils.labels import get_data_label, get_form_label
 from core_main_app.views.common.views import CommonView, XmlEditor, JSONEditor
 from core_curate_app.access_control import api as acl_api
+from core_curate_app.utils.validation import check_well_formed
 
 
 class FormView(CommonView):
@@ -68,6 +69,9 @@ class FormView(CommonView):
                     + _("form_label")
                     + " was not saved and cannot be displayed."
                 )
+
+            # check if the form is well formed
+            check_well_formed(curate_data_structure.form_string)
 
             # Set the assets
             assets = {
@@ -262,6 +266,7 @@ class DataStructureXMLEditor(DataStructureMixin, XmlEditor):
 
         Returns:
         """
+        check_well_formed(data_structure.form_string)
         return self.get_context(
             data_structure, data_structure.name, data_structure.form_string
         )
@@ -300,6 +305,7 @@ class DataStructureJSONEditor(DataStructureMixin, JSONEditor):
 
         Returns:
         """
+        check_well_formed(data_structure.form_string)
         return self.get_context(
             data_structure, data_structure.name, data_structure.form_string
         )

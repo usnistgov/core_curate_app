@@ -231,14 +231,19 @@ var validate = function() {
  */
 function buildMessageFromList(errorList) {
     let node = document.createElement("ul");
-    node.innerHTML = errorList.map((item) => {return `<li>${item}</li>`}).join("");
+    
+    errorList.forEach((item) => {
+        let li = document.createElement("li");
+        li.textContent = item;
+        node.appendChild(li);
+    });
 
     // Display the list of item nicely.
     node.style.padding = "revert";
     node.style.margin = "0";
     node.style.listStyle = "initial";
 
-    return node.outerHTML;
+    return node;
 }
 
 /**
@@ -269,7 +274,18 @@ var showDataValidationError = function(errors) {
     let node = document.createElement("div");
     node.classList.add("alert");
     node.classList.add("alert-danger");
-    node.innerHTML = `<strong>Error!</strong> ${buildErrorMessage(errors)}`;
+    
+    let strong = document.createElement("strong");
+    strong.textContent = "Error!";
+    node.appendChild(strong);
+    node.appendChild(document.createTextNode(" "));
+
+    let msg = buildErrorMessage(errors);
+    if (msg instanceof HTMLElement ){
+        node.appendChild(msg);
+    } else {
+        node.appendChild(document.createTextNode(msg));
+    }
 
     // Attach the element to the modal and display the modal.
     $errorMessage.prepend(node.cloneNode(true));
@@ -288,7 +304,12 @@ var displayWarningInValidModal = function(warningMessage) {
     node.classList.add("alert");
     node.classList.add("alert-warning");
     node.classList.add("alert-warning-xml");
-    node.innerHTML = "<strong>Warning!</strong> " + warningMessage;
+    
+    let strong = document.createElement("strong");
+    strong.textContent = "Warning";
+    node.appendChild(strong);
+    node.appendChild(document.createTextNode(" "));
+    node.appendChild(document.createTextNode(warningMessage));
 
     clearPreviousWarning();
 

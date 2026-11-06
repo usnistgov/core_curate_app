@@ -294,7 +294,7 @@ class DataStructureRootElementsFixtures(FixtureInterface):
         """
 
         self.data_structure_root_element = DataStructureElement(
-            user="3",
+            user="1",
             tag="tag",
             value="value",
             options={},

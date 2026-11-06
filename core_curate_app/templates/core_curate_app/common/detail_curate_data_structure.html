@@ -1,3 +1,8 @@
 {% load xsl_transform_tag %}
+{% load format_json %}
+{% if data.data_structure.template.format == "XSD" %}
 {% xsl_transform_detail xml_content=data.data_structure.form_string request=request as xml_representation %}
 {{ xml_representation|safe}}
+{% else %}
+{{data.data_structure.form_string}}
+{% endif %}

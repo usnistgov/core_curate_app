@@ -39,9 +39,10 @@ class TestCancelChangesView(TestCase):
         mock_render_form,
     ):
         """test_cancel_changes_return_http_response_with_xsd_form"""
-        mock_data = MagicMock(
-            data=None, form_string=None, template=_get_template()
-        )
+        mock_data = MagicMock()
+        mock_data.data = None
+        mock_data.form_string = None
+        mock_data.template = _get_template()
         mock_curate_data_structure_get_by_id.return_value = mock_data
 
         mock_generate_root_element.return_value = MagicMock()
@@ -60,9 +61,11 @@ class TestCancelChangesView(TestCase):
         mock_curate_data_structure_get_by_id,
     ):
         """test_cancel_changes_return_http_response_with_content"""
-        mock_data = MagicMock(
-            form_string="test", data=None, template=_get_json_template()
-        )
+        mock_data = MagicMock()
+        mock_data.form_string = "test"
+        mock_data.data = None
+        mock_data.template = _get_json_template()
+
         mock_curate_data_structure_get_by_id.return_value = mock_data
 
         response = curate_user_ajax.cancel_changes(
@@ -81,7 +84,8 @@ class TestCancelChangesView(TestCase):
         mock_render_form,
     ):
         """test_cancel_changes_with_empty_string_form_returns_http_200"""
-        mock_data = MagicMock(template=_get_template())
+        mock_data = MagicMock()
+        mock_data.template = _get_template()
         mock_curate_data_structure_get_by_id.return_value = mock_data
 
         mock_generate_root_element.return_value = MagicMock()
@@ -104,7 +108,9 @@ class TestCancelChangesView(TestCase):
         mock_render_form,
     ):
         """test_cancel_changes_with_empty_string_form_returns_http_200"""
-        mock_data = MagicMock(string_form="test", template=_get_template())
+        mock_data = MagicMock()
+        mock_data.string_form = "test"
+        mock_data.template = _get_template()
         mock_curate_data_structure_get_by_id.return_value = mock_data
 
         mock_generate_root_element.return_value = MagicMock()
@@ -364,8 +370,12 @@ class TestSaveFormView(TestCase):
     ):
         """test_save_form_with_xsd_template_returns_http_200"""
         mock_template = _get_template()
-        mock_curate_data_structure_api.get_by_id.return_value = MagicMock(
-            template=mock_template, data=None, name="title"
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data.data = None
+        mock_curate_data.name = "title"
+        mock_curate_data_structure_api.get_by_id.return_value = (
+            mock_curate_data
         )
         mock_render_xml.return_value = Mock()
         mock_curate_data_structure_api.upsert.return_value = None
@@ -379,8 +389,12 @@ class TestSaveFormView(TestCase):
     ):
         """test_save_form_with_json_template_returns_http_200"""
         mock_template = _get_json_template()
-        mock_curate_data_structure_api.get_by_id.return_value = MagicMock(
-            template=mock_template, data=None, name="title"
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data.data = None
+        mock_curate_data.name = "title"
+        mock_curate_data_structure_api.get_by_id.return_value = (
+            mock_curate_data
         )
         mock_curate_data_structure_api.upsert.return_value = None
 
@@ -441,9 +455,9 @@ class TestGenerateChoiceView(TestCase):
     ):
         """test_generate_choice_return_http_bad_request_if_not_xsd_template"""
         mock_template = _get_json_template()
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
 
         response = curate_user_ajax.generate_choice(
@@ -480,9 +494,9 @@ class TestGenerateChoiceView(TestCase):
     ):
         """test_generate_choice_returns_html_form"""
         mock_template = _get_template()
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
         mock_generate_choice_absent.return_value = "form"
 
@@ -513,9 +527,9 @@ class TestGenerateElementView(TestCase):
     ):
         """test_generate_element_return_http_bad_request_if_not_xsd_template"""
         mock_template = _get_json_template()
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
 
         response = curate_user_ajax.generate_element(
@@ -552,9 +566,9 @@ class TestGenerateElementView(TestCase):
     ):
         """test_generate_element_returns_html_form"""
         mock_template = _get_template()
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
         mock_generate_choice_absent.return_value = "form"
 
@@ -585,9 +599,9 @@ class TestClearFieldsView(TestCase):
     ):
         """test_clear_fields_return_http_bad_request_if_not_xsd_template"""
         mock_template = _get_json_template()
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
 
         response = curate_user_ajax.clear_fields(
@@ -611,9 +625,9 @@ class TestClearFieldsView(TestCase):
     ):
         """test_clear_fields_returns_form"""
         mock_template = _get_template()
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
         mock_generate_form.return_value = MagicMock()
         mock_render_form.return_value = "form"
@@ -646,9 +660,9 @@ class TestValidateFormView(TestCase):
         """test_validate_form_return_http_bad_request_when_template_is_not_supported"""
         mock_template = _get_json_template()
         mock_template.format = "mock_unsupported_format"
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
 
         response = curate_user_ajax.validate_form(
@@ -670,9 +684,9 @@ class TestValidateFormView(TestCase):
     ):
         """test_validate_form_returns_errors"""
         mock_template = _get_template()
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
         mock_render_xml.return_value = "<root></root>"
 
@@ -694,9 +708,9 @@ class TestValidateFormView(TestCase):
     ):
         """test_invalid_xml_returns_errors"""
         mock_template = _get_template()
-        mock_curate_data_structure_api.return_value = MagicMock(
-            template=mock_template
-        )
+        mock_curate_data = MagicMock()
+        mock_curate_data.template = mock_template
+        mock_curate_data_structure_api.return_value = mock_curate_data
         mock_template_get_by_id.return_value = mock_template
         mock_render_xml.return_value = "<root></ro"
 
@@ -718,9 +732,9 @@ class TestValidateFormView(TestCase):
     ):
         """test_validate_json_form_calls_validate_json_data"""
         mock_template = _get_json_template()
-        mock_curate_data_structure = MagicMock(
-            template=mock_template, form_string=json.dumps({"root": "value"})
-        )
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure.template = mock_template
+        mock_curate_data_structure.form_string = json.dumps({"root": "value"})
         mock_curate_data_structure_api.get_by_id.return_value = (
             mock_curate_data_structure
         )
@@ -745,9 +759,9 @@ class TestValidateFormView(TestCase):
     ):
         """test_invalid_json_form_returns_errors"""
         mock_template = _get_json_template()
-        mock_curate_data_structure = MagicMock(
-            template=mock_template, form_string=json.dumps({"root": "value"})
-        )
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure.template = mock_template
+        mock_curate_data_structure.form_string = json.dumps({"root": "value"})
         mock_curate_data_structure_api.get_by_id.return_value = (
             mock_curate_data_structure
         )
@@ -777,9 +791,9 @@ class TestValidateFormView(TestCase):
     ):
         """test_invalid_json_form_returns_errors"""
         mock_template = _get_json_template()
-        mock_curate_data_structure = MagicMock(
-            template=mock_template, form_string=json.dumps({"root": "value"})
-        )
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure.template = mock_template
+        mock_curate_data_structure.form_string = json.dumps({"root": "value"})
         mock_curate_data_structure_api.get_by_id.return_value = (
             mock_curate_data_structure
         )
@@ -821,13 +835,19 @@ class TestSaveDataView(TestCase):
     ):
         """test_save_data_returns_http_response_if_xsd_template"""
         mock_template = _get_template()
-        mock_curate_data_structure_api.get_by_id.return_value = MagicMock(
-            template=mock_template, data=None, name="title"
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure_api.get_by_id.return_value = (
+            mock_curate_data_structure
         )
+        mock_curate_data_structure.template = mock_template
+        mock_curate_data_structure.data = None
+        mock_curate_data_structure.name = "title"
         mock_curate_data_structure_api.delete.return_value = None
         mock_render_xml.return_value = "<root></root>"
         mock_template_get_by_id.return_value = mock_template
-        mock_data_upsert.return_value = MagicMock(id=1)
+        mock_data = MagicMock()
+        mock_data.id = 1
+        mock_data_upsert.return_value = mock_data
 
         response = curate_user_ajax.save_data(
             self.request,
@@ -852,12 +872,18 @@ class TestSaveDataView(TestCase):
     ):
         """test_save_data_returns_http_response_if_json_template"""
         mock_template = _get_json_template()
-        mock_curate_data_structure_api.get_by_id.return_value = MagicMock(
-            template=mock_template, data=None, name="title"
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure.template = mock_template
+        mock_curate_data_structure.data = None
+        mock_curate_data_structure.name = "title"
+        mock_curate_data_structure_api.get_by_id.return_value = (
+            mock_curate_data_structure
         )
         mock_curate_data_structure_api.delete.return_value = None
         mock_template_get_by_id.return_value = mock_template
-        mock_data_upsert.return_value = MagicMock(id=1)
+        mock_data = MagicMock()
+        mock_data.id = 1
+        mock_data_upsert.return_value = mock_data
 
         response = curate_user_ajax.save_data(
             self.request,
@@ -877,8 +903,12 @@ class TestSaveDataView(TestCase):
         mock_messages,
     ):
         """test_save_data_returns_http_bad_request_when_template_is_not_supported"""
-        mock_curate_data_structure_api.get_by_id.return_value = MagicMock(
-            template=Template(format="BAD_FORMAT"), data=None, name="title"
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure.template = Template(format="BAD_FORMAT")
+        mock_curate_data_structure.data = None
+        mock_curate_data_structure.name = "title"
+        mock_curate_data_structure_api.get_by_id.return_value = (
+            mock_curate_data_structure
         )
         mock_curate_data_structure_api.delete.return_value = None
 
@@ -909,8 +939,10 @@ class TestStartCurateGetView(TestCase):
     ):
         """test_start_curate_get_returns_http_response"""
         mock_template = _get_template()
-        mock_curate_data_structure_api.get_all_by_user_id_and_template_id_with_no_data.return_value = MagicMock(
-            template=mock_template,
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure.template = mock_template
+        mock_curate_data_structure_api.get_all_by_user_id_and_template_id_with_no_data.return_value = (
+            mock_curate_data_structure
         )
         mock_curate_data_structure_api.delete.return_value = None
         mock_template_get_by_id.return_value = mock_template
@@ -946,8 +978,10 @@ class TestStartCuratePostView(TestCase):
     ):
         """test_start_curate_post_returns_http_bad_response_when_bad_template_format"""
         mock_template = Template(format=None)
-        mock_curate_data_structure_api.get_all_by_user_id_and_template_id_with_no_data.return_value = MagicMock(
-            template=mock_template,
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure.template = mock_template
+        mock_curate_data_structure_api.get_all_by_user_id_and_template_id_with_no_data.return_value = (
+            mock_curate_data_structure
         )
         mock_curate_data_structure_api.delete.return_value = None
         mock_template_get_by_id.return_value = mock_template

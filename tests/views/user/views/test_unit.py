@@ -565,7 +565,8 @@ class TestGenerateRootElementView(TestCase):
     ):
         """test_generate_element_root_raises_xsd_error_if_not_xsd_template"""
         mock_template = _get_json_template()
-        mock_curate_data_structure = MagicMock(template=mock_template)
+        mock_curate_data_structure = MagicMock()
+        mock_curate_data_structure.template = mock_template
         mock_template_get_by_id.return_value = mock_template
 
         with self.assertRaises(XSDError):
@@ -592,9 +593,11 @@ class TestDownloadCurrentDocumentView(TestCase):
         mock_render_xml,
     ):
         """test_download_xml_document_returns_file_without_formatting"""
-        mock_data = MagicMock(
-            template=Template(format=Template.XSD), data=None, user="1"
-        )
+        mock_data = MagicMock()
+        mock_data.template = Template(format=Template.XSD)
+        mock_data.name = "test"
+        mock_data.data = None
+        mock_data.user = "1"
         mock_curate_data_structure_api.get_by_id.return_value = mock_data
 
         mock_render_xml.return_value = "<root></root>"
@@ -612,9 +615,11 @@ class TestDownloadCurrentDocumentView(TestCase):
         mock_render_xml,
     ):
         """test_download_xml_document_returns_file_with_formatting_option"""
-        mock_data = MagicMock(
-            template=Template(format=Template.XSD), data=None, user="1"
-        )
+        mock_data = MagicMock()
+        mock_data.template = Template(format=Template.XSD)
+        mock_data.name = "test"
+        mock_data.data = None
+        mock_data.user = "1"
         mock_curate_data_structure_api.get_by_id.return_value = mock_data
 
         mock_render_xml.return_value = "<root></root>"
@@ -631,12 +636,13 @@ class TestDownloadCurrentDocumentView(TestCase):
         mock_curate_data_structure_api,
     ):
         """test_download_xml_document_returns_file"""
-        mock_data = MagicMock(
-            template=Template(format=Template.JSON),
-            data=None,
-            user="1",
-            form_string="",
-        )
+        mock_data = MagicMock()
+        mock_data.template = Template(format=Template.JSON)
+        mock_data.name = "test"
+        mock_data.data = None
+        mock_data.user = "1"
+        mock_data.form_string = ""
+
         mock_curate_data_structure_api.get_by_id.return_value = mock_data
 
         response = curate_user_views.download_current_document(self.request, 1)
@@ -649,12 +655,12 @@ class TestDownloadCurrentDocumentView(TestCase):
         mock_curate_data_structure_api,
     ):
         """test_download_xml_document_returns_file"""
-        mock_data = MagicMock(
-            template=Template(format=Template.JSON),
-            data=None,
-            user="1",
-            form_string="{}",
-        )
+        mock_data = MagicMock()
+        mock_data.template = Template(format=Template.JSON)
+        mock_data.name = "test"
+        mock_data.data = None
+        mock_data.user = "1"
+        mock_data.form_string = "{}"
         mock_curate_data_structure_api.get_by_id.return_value = mock_data
 
         self.request.GET = {"pretty_print": True}
@@ -690,7 +696,10 @@ class TestDownloadTemplateView(TestCase):
         )
 
         mock_template = Template(format=Template.XSD, content=content)
-        mock_data = MagicMock(template=mock_template, data=None, user="1")
+        mock_data = MagicMock()
+        mock_data.template = mock_template
+        mock_data.data = None
+        mock_data.user = "1"
 
         mock_curate_data_structure_api.get_by_id.return_value = mock_data
 
@@ -716,7 +725,10 @@ class TestDownloadTemplateView(TestCase):
         )
 
         mock_template = Template(format=Template.XSD, content=content)
-        mock_data = MagicMock(template=mock_template, data=None, user="1")
+        mock_data = MagicMock()
+        mock_data.template = mock_template
+        mock_data.data = None
+        mock_data.user = "1"
 
         mock_curate_data_structure_api.get_by_id.return_value = mock_data
 
@@ -737,7 +749,10 @@ class TestDownloadTemplateView(TestCase):
     ):
         """test_download_json_template_returns_file_without_formatting"""
         mock_template = Template(format=Template.JSON, content="{}")
-        mock_data = MagicMock(template=mock_template, data=None, user="1")
+        mock_data = MagicMock()
+        mock_data.template = mock_template
+        mock_data.data = None
+        mock_data.user = "1"
         mock_curate_data_structure_api.get_by_id.return_value = mock_data
         mock_template_get_by_id.return_value = mock_template
 
@@ -754,7 +769,10 @@ class TestDownloadTemplateView(TestCase):
     ):
         """test_download_json_document_returns_formatted_file"""
         mock_template = Template(format=Template.JSON, content="{}")
-        mock_data = MagicMock(template=mock_template, data=None, user="1")
+        mock_data = MagicMock()
+        mock_data.template = mock_template
+        mock_data.data = None
+        mock_data.user = "1"
         mock_curate_data_structure_api.get_by_id.return_value = mock_data
         mock_template_get_by_id.return_value = mock_template
 
